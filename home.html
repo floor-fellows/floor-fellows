@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>Floor Fellows</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Raleway", sans-serif;
+      background-color: #222222;
+      color: #fff;
+    }
+    .hero-img {
+      width: 100%;
+      max-height: 45vh;
+      object-fit: contain;
+      border-radius: 1rem;       /* optional: rounds edges */
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    header.hero {
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+      background-size: contain;           /* Makes image fill the container */
+      background-position: center;      /* Centers the image */
+      background-repeat: no-repeat;     /* Prevents tiling if the image is small */
+      height: 60vh;                    /* Makes hero section fill the viewport */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 4rem;
+      position: relative;
+      text-align: center;
+    }
+    header.hero h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 6px;
+      color: #fdcd0a;
+      text-shadow:
+        -4px -4px 0 black,
+        4px -4px 0 black,
+        -4px  4px 0 black,
+        4px  4px 0 black;  /* outlines text with black */
+    }
+    header.hero p {
+      margin-bottom: 2rem;
+    }
+    .quote-button {
+      background-color: #fdcd0a;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .quote-button:hover {
+      background-color: #fdcd0a;
+    }
+    .services, .contact-form {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 1rem;
+    }
+    .service-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .services-icon {
+      width: 45%;
+      height: auto;
+      object-fit: cover;
+    }
+    .service-text {
+      width: 50%;
+    }
+    .image-on-right {
+      flex-direction: row;
+      padding: 0.75rem;
+    }
+    .service-item h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: #bcc3ce;
+      margin: 0;
+      font-size: 1.2em;
+    }
+    li {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      border: 1px solid #ccc;
+      background-color: #000;
+      color: #ccc;
+    }
+    button[type="submit"] {
+      background-color: #fdcd0a;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #fdcd0a;
+    }
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid #4b5563;
+      color: #bcc3ce;
+    }
+    .slogan {
+      font-size: 2em;
+    }
+    .comp {
+      width: 50%;
+      padding: 1%;
+    }
+    hr {
+      width: 80%;               /* or any fixed size like 400px */
+      margin: 2rem auto;        /* centers it horizontally */
+      border: none;
+      border-top: 1px solid #ccc; /* or whatever style you want */
+    }
+    .hr2 {
+      width: 100%;
+      margin: 2rem auto;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+    .floors {
+      list-style-type: disc;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-left: 1rem;
+      margin: 0;
+    }
+    .floors li {
+      width: 45%;         /* Two items per row */
+      color: #bcc3ce;     /* Matches your existing paragraph style */
+    }
+    .sticky-quote {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #fdcd0a;
+      color: #000;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      font-weight: bold;
+      z-index: 1000;
+      display: none; /* Hidden by default */
+      text-align: center;
+      animation: shimmer 1s infinite alternate;
+    }
+
+    .sticky-button {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    /* Show only on desktop */
+    @media (min-width: 768px) {
+      .sticky-quote {
+        display: block;
+        text-align: center;
+      }
+    }
+    /* Shimmer animation */
+    @keyframes shimmer {
+      0% {
+        box-shadow: 0 0 8px rgba(255, 152, 0, 0.3), 0 0 12px rgba(255, 152, 0, 0.2);
+      }
+      100% {
+        box-shadow: 0 0 33px rgba(255, 152, 0, 0.8), 0 0 43px rgba(255, 152, 0, 0.6);
+      }
+    }
+
+    .contact-preference {
+      display: flex;
+      align-items: center;
+      gap: 1rem; /* space between items */
+      flex-wrap: wrap; /* allows wrapping on smaller screens */
+      font-size: 1.1em;
+    }
+
+    .contact-preference label {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .navbar {
+      text-align: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2.8rem;  /* space between items */
+    }
+
+    .navbar a {
+      color: #fdcd0a;               /* gold accent color */
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #fff;                  /* white on hover */
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+  <img src="logo_ribbon_red.png" alt="Hero background" class="hero-img" />
+  <div class="hero-content">
+    <img src="comp.png" class="comp">
+    <p class="slogan"><b>Impressive Floors for Welcoming Spaces.</b></p>
+  </div>
+  </header>
+  <hr>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="tips.html">Floor Care Tips</a></li>
+      <li><a href="#quote-form">Free Quote</a></li>
+    </ul>
+  </nav>
+  <hr>
+
+  <section class="services">
+    <div>
+      <h3 style="text-align:center"></h3>
+      <p style="color:white">At Floor Fellows, we know first impressions start from the ground up. With over 15 years of experience, we work one-on-one with homeowners, businesses, and facility managers to deliver lasting results without the heft price tag. Whether it's your family's kitchen or a busy sales floor, we make sure your floors impress.</p>
+      <br>
+      <ul>
+        <li>Quick, efficient, high-quality services without the inflated prices.</li>
+        <li>Custom service plans tailored to your budget and needs.</li>
+        <li>Free services or products included with every service plan.</li>
+        <li>Flexible scheduling built around your home life or business's operations.</li>
+        <li>Professional services with respect for your time and space.</li>
+      </ul>
+    </div>
+  </section>
+  <hr>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="service-item">
+      <img src="logo_green.png" class="services-icon">
+      <div class="service-text">
+      <h3>Deep Cleaning</h3>
+      <p>Remove years of grime and buildup with our professional grade cleaning systems tailored to your floor.</p>
+      <h3>Stripping & Waxing</h3>
+      <p>Restore shine and protect your floors with careful stripping and premium finishes.</p>
+      <h3>Sealing & Polishing</h3>
+      <p>Seal and polish for long-term protection and a clean, high-gloss finish.</p>
+      <h3>Concrete Polishing</h3>
+      <p>Polish raw concrete to a high-reflective surface. No floor finish needed.
+    </div>
+  </section>
+  <hr>
+
+  <section class="services">
+  <div class="service-item image-on-right">
+    <div class="service-text">
+      <h3>Floors We Service</h3>
+      <ul class="floors">
+          <li>VCT</li>
+          <li>LVT</li>
+          <li>Terrazzo</li>
+          <li>Natural stone</li>
+          <li>Travertine</li>
+          <li>Terracotta</li>
+          <li>Ceramic</li>
+          <li>Pebble</li>
+          <li>Vinyl</li>
+          <li>Quartzite</li>
+          <li>Steel</li>
+          <li>Sandstone</li>
+          <li>Sealed concrete</li>
+          <li>Brick</li>
+          <li>Shell mosaic</li>
+          <li>Limestone</li>
+          <li>Marble</li>
+          <li>Quarry tile</li>
+          <li>Granite</li>
+          <li>Slate</li>
+          <li>Concrete (raw,<br>sealed, polished, painted, stained, unsealed)</li>
+          <li><b><i>...and much more!</i></b></li>
+        </ul>
+        <br>
+        <hr class="hr2">
+        <br>
+        <h3>Industries & Facilities We Service</h3>        
+        <ul class="floors">
+          <li>Residential homes</li>
+          <li>Retail stores</li>
+          <li>Office spaces</li>
+          <li>Schools & universities</li>
+          <li>Restaurants</li>
+          <li>Hospitals & clinics</li>
+          <li>Warehouses & distribution centers</li>
+        </ul>
+      </div>
+      <img src="logo_green.png" class="services-icon">
+    </div>
+  </section>
+  <hr>
+
+  <section class="contact-form" id="quote-form">
+    <h2>Request a Free Quote!</h2>
+    <p>We do not use a "one-size-fits-all" approach. We meet one-on-one with every customer to create a custom tailored plan to ensure that all needs are met and quality is maintained, all within your budget.</p>
+    <br>
+    <p>If you wanna get the ball rolling, fill out the form below, and you should receive a call or text from one of our techs within 24 hours to schedule an on-site assessment and will provide you with a quote that will be honored for 30 days.</p>
+    <br>
+    <form>
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <div class="contact-preference">
+        <span>Do you prefer a phone call or text?</span>
+        <label>
+          <input type="checkbox" name="contact_pref" value="call"> Phone Call
+        </label>
+        <label>
+          <input type="checkbox" name="contact_pref" value="text"> Text Message
+        </label>
+      </div>
+      <textarea name="message" rows="6" placeholder="Message"></textarea>
+      <button type="submit">Send Request</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Floor Fellows</p>
+    <p>
+  </footer>
+
+  <script>
+    function scrollToQuote() {
+      const quoteForm = document.getElementById('quote-form');
+      if (quoteForm) {
+        quoteForm.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
+
+  <div class="sticky-quote">
+    <p style="color:black">High-quality, professional services<br>without the inflated prices.</p>
+    <br>
+    <p style="color:black">Click the button to request a free quote!</p>
+    <a href="#quote-form" class="sticky-button">Get Quote</a>
+  </div>
+
+  </body>
+</html>
