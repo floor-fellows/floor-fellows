@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>Floor Fellows</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Raleway", sans-serif;
+      background-color: #222222;
+      color: #fff;
+    }
+    .hero-img {
+      width: 100%;
+      max-height: 45vh;
+      object-fit: contain;
+      border-radius: 1rem;       /* optional: rounds edges */
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    header.hero {
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+      background-size: contain;           /* Makes image fill the container */
+      background-position: center;      /* Centers the image */
+      background-repeat: no-repeat;     /* Prevents tiling if the image is small */
+      height: 60vh;                    /* Makes hero section fill the viewport */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 4rem;
+      position: relative;
+      text-align: center;
+    }
+    header.hero h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 6px;
+      color: #fdcd0a;
+      text-shadow:
+        -4px -4px 0 black,
+        4px -4px 0 black,
+        -4px  4px 0 black,
+        4px  4px 0 black;  /* outlines text with black */
+    }
+    header.hero p {
+      margin-bottom: 2rem;
+    }
+    .quote-button {
+      background-color: #fdcd0a;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .quote-button:hover {
+      background-color: #fdcd0a;
+    }
+    .services, .contact-form {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 1rem;
+    }
+    .service-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .services-icon {
+      width: 45%;
+      height: auto;
+      object-fit: cover;
+    }
+    .service-text {
+      width: 50%;
+    }
+    .image-on-right {
+      flex-direction: row;
+      padding: 0.75rem;
+    }
+    .service-item h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: #bcc3ce;
+      margin: 0;
+      font-size: 1.2em;
+    }
+    li {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      border: 1px solid #ccc;
+      background-color: #000;
+      color: #ccc;
+    }
+    button[type="submit"] {
+      background-color: #fdcd0a;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #fdcd0a;
+    }
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid #4b5563;
+      color: #bcc3ce;
+    }
+    .slogan {
+      font-size: 2em;
+    }
+    .comp {
+      width: 50%;
+      padding: 1%;
+    }
+    hr {
+      width: 80%;               /* or any fixed size like 400px */
+      margin: 2rem auto;        /* centers it horizontally */
+      border: none;
+      border-top: 1px solid #ccc; /* or whatever style you want */
+    }
+    .hr2 {
+      width: 100%;
+      margin: 2rem auto;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+    .floors {
+      list-style-type: disc;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-left: 1rem;
+      margin: 0;
+    }
+    .floors li {
+      width: 45%;         /* Two items per row */
+      color: #bcc3ce;     /* Matches your existing paragraph style */
+    }
+    .sticky-quote {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #fdcd0a;
+      color: #000;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      font-weight: bold;
+      z-index: 1000;
+      display: none; /* Hidden by default */
+      text-align: center;
+      animation: shimmer 1s infinite alternate;
+    }
+
+    .sticky-button {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    /* Show only on desktop */
+    @media (min-width: 768px) {
+      .sticky-quote {
+        display: block;
+        text-align: center;
+      }
+    }
+    /* Shimmer animation */
+    @keyframes shimmer {
+      0% {
+        box-shadow: 0 0 8px rgba(255, 152, 0, 0.3), 0 0 12px rgba(255, 152, 0, 0.2);
+      }
+      100% {
+        box-shadow: 0 0 33px rgba(255, 152, 0, 0.8), 0 0 43px rgba(255, 152, 0, 0.6);
+      }
+    }
+
+    .contact-preference {
+      display: flex;
+      align-items: center;
+      gap: 1rem; /* space between items */
+      flex-wrap: wrap; /* allows wrapping on smaller screens */
+      font-size: 1.1em;
+    }
+
+    .contact-preference label {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .navbar {
+      text-align: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2.8rem;  /* space between items */
+    }
+
+    .navbar a {
+      color: #fdcd0a;               /* gold accent color */
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #fff;                  /* white on hover */
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+  <img src="logo_ribbon_red.png" alt="Hero background" class="hero-img" />
+  <div class="hero-content">
+    <img src="comp.png" class="comp">
+    <p class="slogan"><b>Impressive Floors for Welcoming Spaces.</b></p>
+  </div>
+  </header>
+  <hr class="hr0">
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="tips.html">Floor Care Tips</a></li>
+      <li><a href="#quote-form">Free Quote</a></li>
+    </ul>
+  </nav>
+  <hr class="hr0">
+
+  <section class="services">
+    <div>
+      <h2 style="text-align:center">Floor Care Tips</h2>
+      <p style="color:white">Keeping your floors in top condition doesn't just improve appearance. It also extends their life and saves money on repairs or replacements. Below are simple, effective tips for maintaining the most common types of hard floors, whether in your home or business.</p>
+      <br>
+      <ul>
+        <li><b>Polished Concrete</b></li>
+        <p>Polished concrete is one of the most versatile flooring options available. It's durable enough for warehouses, sleek enough for showrooms, and practical enough for residential spaces like garages or basements. Customers love it because it's highly customizable — you can choose anything from a soft matte to a high-gloss finish — and it requires far less upkeep than many other flooring types. On top of that, polished concrete resists dust, allergens, and heavy wear, making it both elegant and functional.</p>
+        <ul>
+            <li>Sweep the floor regularly to remove grit that can scratch the surface. Swiffers or other lay-flat-type mops are the best options for sweeping polished concrete.</li>
+            <li>Use a neutral pH cleaner to mop. Harsh or acidic chemicals can erode the floor. Fabuloso is the most common pH neutral floor cleaner.</li>
+            <li>Wipe up spills promptly to prevent staining.</li>
+            <li>Place mats and rugs at entryways to reduce dirt and moisture.</li>
+            <li>For high-traffic areas, consider periodic professional burnishing or repolishing to restore gloss.</li>
+            <li>Avoid waxes and coatings. One of the greatest benefits of polished concrete is that it never needs any wax or sealers.</li>
+        </ul>
+        <br>
+        <br>
+        <li><b>Natural Stone<br>(marble, granite, travertine, limestone, slate, quarry, terracotta, brick)</b></li>
+        <p>Natural stone adds timeless elegance and unique character to any space, with each floor offering one-of-a-kind patterns, colors, and textures. But unlike manufactured materials, natural stone is porous, which means it can absorb liquids and is more vulnerable to stains, etching, and wear if not properly maintained. With the right care, however, stone surfaces such as marble, granite, travertine, and limestone can last for decades while maintaining their natural beauty and resilience. Sealed and maintained correctly, they stand up well to daily traffic in both residential and commercial spaces.</p>
+        <ul>
+            <li>Sweep daily to keep grit from scratching the surface</li>
+            <li>Use a neutral pH, stone-specific cleaner. Acidic products will erode, etch, and stain the surface irreparably.</li>
+            <li>Wipe up spills immediately to prevent staining, especially on softer stones like marble or travertine.</li>
+            <li>Place mats and rugs at entryways to reduce the tracking of dirt.</li>
+            <li>Use felt pads under furniture to avoid scratches.</li>
+            <li>Schedule professional sealing every 1-3 years (depending on traffic and stone type) to protect against dirt, grime, stains, and wear.</li>
+        </ul>
+        <br>
+        <br>
+        <li><b>LVT (Luxury Vinyl Tile)</b></li>
+        <p>LVT is one of the most popular flooring choices today because it combines the look of natural materials with impressive durability and affordability. It can mimic the appearance of wood, stone, or ceramic, while offering a softer feel underfoot and excellent resistance to scratches, scuffs, and moisture. Its layered construction makes it stable and long-lasting, even in high-traffic areas, which is why it's a favorite for both residential and commercial spaces.</p>
+        <ul>
+            <li>Sweep or vacuum regularly to remove dirt and grit that could cause scratches.</li>
+            <li>Mop with a neutral pH cleaner. Avoid harsh chemicals or wax-based products.</li>
+            <li>Wipe up spills quickly to prevent seepage through the seams.</li>
+            <li>Use mats and rugs at entrances to reduce dirt.</li>
+            <li>Place felt pads under furniture legs to reduce denting and scratching.</li>
+            <li>Avoid dragging heavy items across the floor.</li>
+        </ul>
+        <br>
+        <br>
+        <li><b>Terrazzo</b></li>
+        <p>Terrazzo is a classic, beautiful flooring material that combines marble, granite, quartz, or glass chips with a binder to create a seamless, durable surface. Depening on when it was installed, terrazzo may be cementitious (common in indoor floors prior to 1970 and in outdoor settings) or resinous/epoxy (the standard for indoor terrazzo since the 1970s). Both are know for their long life, elegant appearance, and ability to handle heavy traffic.</p>
+        <br>
+        <p>Cementitious terrazzo can be sealed or polished like concrete. Epoxy terrazzo must be sealed.</p>
+        <ul>
+          <li>Sweep or dust mop daily to prevent grit from dulling the finish.</li>
+          <li>Mop with a neutral pH cleaner. Avoid acids or harsh chemicals.</li>
+          <li>Wipe spills promptly, especially on cementitious terrazzo, which is more porous.</li>
+          <li>Schedule professional sealing every 1-3 years (for resinous/epoxy terrazzo) and every year (for sealed cementitious terrazzo) for protection against dirt, stains, and heavy wear.</li>
+        </ul>
+        <p><i>* Sealed cementitious terrazzo can be polished like concrete to improve the durability and reduce the labor needed to maintain its cleanliness and quality. Speak to a Floor Fellow technician for information on switching your cementitious terrazzo floors from sealed to polished!</i></p>
+        <br>
+        <br>
+        <li><b>Ceramic/Porcelain</b></li>
+        <p>Ceramic and porcelain tile are some of the most durable and low-maintenance flooring options available. They resist scratches, stains, and moisture better than most surfaces, making them ideal for kitchens, bathrooms, lobbies, and commercial spaces. Porcelain is especially dense and less porous than ceramic, which means it offers even greater resistance to water and wear. With proper care, these floors can last a lifetime while retaining their beauty.</p>
+        <ul>
+          <li>Sweep or vacuum regularly to keep dirt and grit from dulling the surface.</li>
+          <li>Mop with a neutral pH cleaner. Avoid hars chemicals or oil-based soaps that can leave a residue.</li>
+          <li>Scrub grout lines with a soft brush and use a grout-safe cleaner when needed.</li>
+          <li>Seal grout periodically (every 1-2 years, depending on use) to protect against moisture, stains, and deterioration.</li>
+          <li>Wipe up spills quickly to keep both tile and grout looking their best.</li>
+          <li>Use mats at entryways to minimize dirt and moisture being tracked onto the floor.</li>
+          <li>Avoid wax or sealers on the tile itself. Ceramic and porcelain don't need them. Only the grout does.</li>
+        </ul>
+        <br>
+        <br>
+        <li><b>VCT</b></li>
+        <p>VCT (vinyl composition tile) is a workhorse for busy spaces. It's affordable for all budgets, tough, and easy to refresh because the protective shine lives in the finish, not the tile itself. With the right maintenance cycle, VCT delivers a clean, professional look in schools, offices, retail, and healthcare.</p>
+        <ul>
+          <li>Dust mop to remove grit that can scratch the finish.</li>
+          <li>Mop with a neutral pH cleaner. Avoid harsh, alkaline or ammonia-based products that can haze or dull the finish.</li>
+          <li>Use mats and rugs at entryways to reduce the dirt and moisture tracked onto the floor.</li>
+          <li>Use felt pads under the legs of furniture to reduce scratching. Avoid dragging heavy items.</li>
+          <li>High-speed burnishing as needed (weekly to monthly, based on traffic) to restore shine and extend time between recoats.</li>
+          <li>Schedule a professional scrub and recoat periodically (every 6-12 months) to restore the floor's finish. Full strip and refinish is required when the finish no longer shines (every 12-24 months) or becomes stained.</li>
+        </ul>
+        <br>
+    </div>
+    <p style="color:white"><b>Every type of floor has its own strengths and challenges, but with consistent care and the right cleaning practices, you can protect your investment and keep your spaces looking their best and welcoming to all. Whether you're maintaining polished concrete in a warehouse, VCT in a store, or ceramic tile in your home, simple routines make all the difference. And when it's time for a deeper maintenance or professional restoration, Floor Fellows is here to bring out the lasting beauty and durability of your floors."</b></p>
+  </section>
+  <hr>
+  <section class="contact-form" id="quote-form">
+    <h2>Request a Free Quote!</h2>
+    <p>We do not use a "one-size-fits-all" approach. We meet one-on-one with every customer to create a custom tailored plan to ensure that all needs are met and quality is maintained, all within your budget.</p>
+    <br>
+    <p>If you wanna get the ball rolling, fill out the form below, and you should receive a call or text from one of our techs within 24 hours to schedule an on-site assessment and will provide you with a quote that will be honored for 30 days.</p>
+    <br>
+    <form>
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <div class="contact-preference">
+        <span>Do you prefer a phone call or text?</span>
+        <label>
+          <input type="checkbox" name="contact_pref" value="call"> Phone Call
+        </label>
+        <label>
+          <input type="checkbox" name="contact_pref" value="text"> Text Message
+        </label>
+      </div>
+      <textarea name="message" rows="6" placeholder="Message"></textarea>
+      <button type="submit">Send Request</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Floor Fellows</p>
+    <p>
+  </footer>
+
+  <script>
+    function scrollToQuote() {
+      const quoteForm = document.getElementById('quote-form');
+      if (quoteForm) {
+        quoteForm.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
+
+  <div class="sticky-quote">
+    <p style="color:black">High-quality, professional services<br>without the inflated prices.</p>
+    <br>
+    <p style="color:black">Click the button to request a free quote!</p>
+    <a href="#quote-form" class="sticky-button">Get Quote</a>
+  </div>
+  
+  </body>
+</html>
