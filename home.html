@@ -340,7 +340,7 @@
     <br>
     <p>If you wanna get the ball rolling, fill out the form below, and you should receive a call or text from one of our techs within 24 hours to schedule an on-site assessment and will provide you with a quote that will be honored for 30 days.</p>
     <br>
-    <form id="quoteForm1">
+    <form id="quoteForm">
       <input type="text" name="name" placeholder="Full Name" required />
       <input type="email" name="email" placeholder="Email Address" />
       <input type="tel" name="phone" placeholder="Phone Number" required />
@@ -371,7 +371,7 @@
       }
     }
 
-    document.getElementById("quoteForm1").addEventListener("submit", function(e) {
+    document.getElementById("quoteForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const form = e.target;
