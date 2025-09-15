@@ -294,7 +294,7 @@
     <br>
     <p>If you wanna get the ball rolling, fill out the form below, and you should receive a call or text from one of our techs within 24 hours to schedule an on-site assessment and will provide you with a quote that will be honored for 30 days.</p>
     <br>
-    <form>
+    <form id="quoteForm">
       <input type="text" name="name" placeholder="Full Name" required />
       <input type="email" name="email" placeholder="Email Address" />
       <input type="tel" name="phone" placeholder="Phone Number" required />
@@ -324,6 +324,34 @@
         quoteForm.scrollIntoView({ behavior: 'smooth' });
       }
     }
+
+    document.getElementById("quoteForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    contact_pref: Array.from(form.querySelectorAll('input[name="contact_pref"]:checked'))
+                       .map(cb => cb.value).join(", "),
+    message: form.message.value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycby8pr6YeDi80boYyejsLM0tjg9h0ob2b9I6pdImwDJpycDgJBWzmPhnVv9BtILwq7Fs7A/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  }).then(() => {
+    alert("✅ Thank you! Your message has been sent.");
+    form.reset();
+  }).catch(err => {
+    alert("⚠️ There was an error submitting the form.");
+    console.error(err);
+  });
+});
   </script>
 
   <div class="sticky-quote">
